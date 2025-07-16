@@ -27,13 +27,14 @@ def test_transform_data():
 
 # Test the load function
 def test_load_data():
+    # Create unique data for testing
     df = pd.DataFrame({
-        'id': [1, 2],
+        'id': [1, 2],  # Ensure unique 'id' values
         'title': ['Title 1', 'Title 2'],
         'body': ['Body 1', 'Body 2']
     })
 
-    # Assuming the 'posts' table exists in SQLite
+    # Assuming the 'posts' table exists in SQLite, this will handle clearing existing data
     load_data(df)
 
     # Check if data is loaded correctly by querying the SQLite database
