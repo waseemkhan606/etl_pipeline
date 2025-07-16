@@ -35,14 +35,8 @@ def load_data(df):
     conn = sqlite3.connect('etl_data.db')  # Database name is 'etl_data.db'
     cursor = conn.cursor()
 
-    # Create a new table for storing the data (if it doesn't exist)
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS posts (
-        id INTEGER PRIMARY KEY,
-        title TEXT,
-        body TEXT
-    )
-    ''')
+    # Clear the table before inserting new data (to avoid UNIQUE constraint violations)
+    cursor.execute("DELETE FROM posts")
 
     # Insert transformed data into the table
     df.to_sql('posts', conn, if_exists='append', index=False)
